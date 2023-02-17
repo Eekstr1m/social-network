@@ -1,7 +1,22 @@
 const ADD_NEW_MESSAGE = "ADD-NEW-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
-const messagesPageReducer = (state, action) => {
+let initialStore = {
+  usersData: [
+    { id: 1, name: "Vlad", img: "https://place-hold.it/50/871" },
+    { id: 2, name: "Andrew", img: "https://place-hold.it/50/571" },
+    { id: 3, name: "Dmitri", img: "https://place-hold.it/50/261" },
+    { id: 4, name: "Alexandra", img: "https://place-hold.it/50/548" },
+  ],
+  dialogData: [
+    { id: 1, msgText: "Hi" },
+    { id: 2, msgText: "How are u?" },
+    { id: 3, msgText: "Good" },
+  ],
+  addNewMessageText: "",
+};
+
+const messagesPageReducer = (state = initialStore, action) => {
   switch (action.type) {
     case ADD_NEW_MESSAGE:
       let newMessage = {
