@@ -1,0 +1,19 @@
+.item {
+  padding: 0 10px;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.item__link {
+  text-decoration: none;
+  color: inherit;
+
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: #efc949;
+  }
+}
+.activeLink {
+  color: rgb(0, 255, 251);
+}
