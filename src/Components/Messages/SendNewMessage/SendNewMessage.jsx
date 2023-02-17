@@ -1,16 +1,20 @@
 import React from "react";
+import {
+  addNewMessageActionCreator,
+  updateNewMessageTextActionCreator,
+} from "../../../Redux/state";
 import c from "./SendNewMessage.module.scss";
 
 function SendNewMessage(props) {
   let newDialogElement = React.createRef();
 
   let sendMessage = () => {
-    props.addNewMessage();
+    props.dispatch(addNewMessageActionCreator());
   };
 
   let onMessageChange = () => {
     let text = newDialogElement.current.value;
-    props.updateNewMessageText(text);
+    props.dispatch(updateNewMessageTextActionCreator(text));
   };
 
   return (

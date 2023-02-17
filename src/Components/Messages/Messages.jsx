@@ -20,9 +20,8 @@ function Messages(props) {
       <div className={c.dialog}>
         <div className={c.dialog__messages}>{arrActiveDialog}</div>
         <SendNewMessage
-          addNewMessage={props.addNewMessage}
+          dispatch={props.dispatch}
           addNewMessageText={props.state.addNewMessageText}
-          updateNewMessageText={props.updateNewMessageText}
         />
       </div>
     </div>

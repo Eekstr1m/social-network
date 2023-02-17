@@ -13,9 +13,8 @@ function Profile(props) {
     <div className={c.profile}>
       <ProfileUser name="Dmitri K." />
       <NewPost
-        addNewPost={props.addNewPost}
+        dispatch={props.dispatch}
         addNewPostText={props.state.addNewPostText}
-        updateNewPostText={props.updateNewPostText}
       />
       <div className={c.posts}>{arrPost}</div>
     </div>
