@@ -1,0 +1,17 @@
+.newMessage {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 5fr 1fr;
+  grid-gap: 20px;
+  position: absolute;
+  bottom: 0;
+}
+.newMessage__textarea {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+.newMessage__btn {
+  width: 100%;
+  height: 100%;
+}

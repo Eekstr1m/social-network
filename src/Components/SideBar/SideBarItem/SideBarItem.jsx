@@ -1,0 +1,20 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import c from "./SideBarItem.module.scss";
+
+function SideBarItems(props) {
+  return (
+    <div className={c.item}>
+      <NavLink
+        to={props.link}
+        className={(navData) =>
+          navData.isActive ? `${c.item__link} ${c.activeLink}` : c.item__link
+        }
+      >
+        {props.linkName}
+      </NavLink>
+    </div>
+  );
+}
+
+export default SideBarItems;

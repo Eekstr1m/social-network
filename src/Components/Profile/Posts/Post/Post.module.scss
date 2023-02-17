@@ -1,0 +1,22 @@
+.post {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.post__img {
+  display: block;
+  width: 100%;
+  min-width: 50px;
+  height: auto;
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+.post__content {
+  margin-left: 10px;
+  width: 100%;
+}
+.post__message {
+  display: flex;
+  justify-content: space-between;
+}
