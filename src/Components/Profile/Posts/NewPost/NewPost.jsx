@@ -2,7 +2,7 @@ import React from "react";
 import {
   addNewPostActionCreator,
   updateNewPostTextActionCreator,
-} from "../../../../Redux/state";
+} from "../../../../Redux/Reducers/profilePage-reducer";
 import c from "./NewPost.module.scss";
 
 function NewPost(props) {

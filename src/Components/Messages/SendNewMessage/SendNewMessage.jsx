@@ -2,7 +2,7 @@ import React from "react";
 import {
   addNewMessageActionCreator,
   updateNewMessageTextActionCreator,
-} from "../../../Redux/state";
+} from "../../../Redux/Reducers/messagesPage-reducer";
 import c from "./SendNewMessage.module.scss";
 
 function SendNewMessage(props) {
@@ -26,7 +26,7 @@ function SendNewMessage(props) {
           className={c.newMessage__textarea}
           value={props.addNewMessageText}
           name="newpost"
-          placeholder="Type post text"
+          placeholder="Type message"
         />
       </div>
       <div className={c.newMessage__button}>
