@@ -1,22 +1,15 @@
 import React from "react";
-import NewPost from "./Posts/NewPost/NewPost";
-import Post from "./Posts/Post/Post";
+import NewPostContainer from "./Posts/NewPost/NewPostContainer";
+import PostContainer from "./Posts/Post/PostContainer";
 import c from "./Profile.module.scss";
 import ProfileUser from "./User/User";
 
 function Profile(props) {
-  let arrPost = props.state.postData.map((obj) => (
-    <Post key={obj.id} message={obj.message} like={obj.like} />
-  ));
-
   return (
     <div className={c.profile}>
       <ProfileUser name="Dmitri K." />
-      <NewPost
-        dispatch={props.dispatch}
-        addNewPostText={props.state.addNewPostText}
-      />
-      <div className={c.posts}>{arrPost}</div>
+      <NewPostContainer store={props.store} />
+      <PostContainer store={props.store} />
     </div>
   );
 }

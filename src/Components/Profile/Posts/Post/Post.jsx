@@ -1,5 +1,5 @@
-import c from "./Post.module.scss";
 import React from "react";
+import c from "./Post.module.scss";
 
 function Post(props) {
   return (

@@ -2,37 +2,24 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import Header from "./Components/Header/Header";
-import Messages from "./Components/Messages/Messages";
+import MessagesContainer from "./Components/Messages/MessagesContainer";
 import Music from "./Components/Music/Music";
 import News from "./Components/News/News";
 import Profile from "./Components/Profile/Profile";
 import Settings from "./Components/Settings/Settings";
-import Sidebar from "./Components/SideBar/Sidebar";
+import SidebarContainer from "./Components/SideBar/SidebarContainer";
 
 function App(props) {
   return (
     <div className="app-wrapper">
       <Header />
-      <Sidebar state={props.state.sidebarLinks} />
+      <SidebarContainer store={props.store} />
       <div className="app-wrapper__content">
         <Routes>
-          <Route
-            path="/profile"
-            element={
-              <Profile
-                state={props.state.profilePage}
-                dispatch={props.dispatch}
-              />
-            }
-          />
+          <Route path="/profile" element={<Profile store={props.store} />} />
           <Route
             path="/messages/*"
-            element={
-              <Messages
-                state={props.state.messagesPage}
-                dispatch={props.dispatch}
-              />
-            }
+            element={<MessagesContainer store={props.store} />}
           />
           <Route path="/news" element={<News />} />
           <Route path="/music" element={<Music />} />

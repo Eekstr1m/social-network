@@ -1,20 +1,16 @@
 import React from "react";
-import {
-  addNewPostActionCreator,
-  updateNewPostTextActionCreator,
-} from "../../../../Redux/Reducers/profilePage-reducer";
 import c from "./NewPost.module.scss";
 
 function NewPost(props) {
   let newPostElement = React.createRef();
 
-  let addPost = () => {
-    props.dispatch(addNewPostActionCreator());
+  let onAddPost = () => {
+    props.addPost();
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch(updateNewPostTextActionCreator(text));
+    props.updateNewPostText(text);
   };
 
   return (
@@ -31,7 +27,7 @@ function NewPost(props) {
         />
       </div>
       <div className={c.newPost__send}>
-        <button onClick={addPost} className="" type="submit">
+        <button onClick={onAddPost} className="" type="submit">
           Send
         </button>
       </div>
