@@ -1,15 +1,16 @@
-let initialStore = {
-  linkData: [
-    { link: "/profile", linkName: "Profile" },
-    { link: "/messages", linkName: "Messages" },
-    { link: "/news", linkName: "News" },
-    { link: "/music", linkName: "Music" },
-    { link: "/settings", linkName: "Settings" },
-  ],
-};
+// let initialStore = {
+//   linkData: [
+//     { link: "/profile", linkName: "Profile" },
+//     { link: "/messages", linkName: "Messages" },
+//     { link: "/news", linkName: "News" },
+//     { link: "/music", linkName: "Music" },
+//     { link: "/users", linkName: "Users" },
+//     { link: "/settings", linkName: "Settings" },
+//   ],
+// };
 
-const sidebarLinksReducer = (state = initialStore, action) => {
-  return state;
-};
+// const sidebarLinksReducer = (state = initialStore, action) => {
+//   return state;
+// };
 
-export default sidebarLinksReducer;
+// export default sidebarLinksReducer;

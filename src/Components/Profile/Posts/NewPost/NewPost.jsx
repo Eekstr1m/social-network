@@ -1,33 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import c from "./NewPost.module.scss";
 
 function NewPost(props) {
-  let newPostElement = React.createRef();
-
-  let onAddPost = () => {
-    props.addPost();
-  };
-
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
-    props.updateNewPostText(text);
-  };
+  const [tempInputMsg, setTempInputMsg] = useState("");
 
   return (
     <div className={c.newPost}>
       <div className={c.newPost__title}>What`s new?</div>
       <div className={c.newPost__content}>
         <textarea
-          ref={newPostElement}
-          onChange={onPostChange}
+          onChange={(e) => {
+            setTempInputMsg(e.currentTarget.value);
+          }}
           className={c.newPost__textarea}
-          value={props.addNewPostText}
+          value={tempInputMsg}
           name="newpost"
           placeholder="Type post text"
         />
       </div>
       <div className={c.newPost__send}>
-        <button onClick={onAddPost} className="" type="submit">
+        <button
+          onClick={() => {
+            setTempInputMsg("");
+            props.setInputMsg(tempInputMsg);
+          }}
+          className=""
+          type="submit"
+        >
           Send
         </button>
       </div>

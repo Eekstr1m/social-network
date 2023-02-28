@@ -1,0 +1,38 @@
+.user {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+.user__img {
+  display: block;
+  width: 100%;
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+}
+.user__content {
+  margin: 0 20px;
+}
+.user__name {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 15px;
+}
+.user__description {
+  color: rgba(#333, 0.6);
+}
+.user__social {
+  display: flex;
+  justify-content: end;
+  text-align: right;
+}
+.user__job {
+  margin-top: 50px;
+}
+
+.job__status {
+  font-size: 20px;
+}
+.job__desc {
+  color: rgba(#333, 0.6);
+}

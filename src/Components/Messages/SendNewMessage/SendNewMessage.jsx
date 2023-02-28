@@ -1,34 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import c from "./SendNewMessage.module.scss";
 
 function SendNewMessage(props) {
-  let newDialogElement = React.createRef();
-
-  let onSendMessage = () => {
-    props.sendMessage();
-  };
-
-  let onMessageChange = () => {
-    let text = newDialogElement.current.value;
-    props.updateNewMessageText(text);
-  };
-
+  const [tempInputMsg, setTempInputMsg] = useState("");
   return (
     <div className={c.newMessage}>
       <div className={c.newMessage__text}>
         <textarea
-          ref={newDialogElement}
-          onChange={onMessageChange}
+          onChange={(e) => {
+            setTempInputMsg(e.currentTarget.value);
+          }}
           className={c.newMessage__textarea}
-          value={props.addNewMessageText}
-          name="newpost"
+          value={tempInputMsg}
+          name="newMessage"
           placeholder="Type message"
         />
       </div>
       <div className={c.newMessage__button}>
         <button
           className={c.newMessage__btn}
-          onClick={onSendMessage}
+          onClick={() => {
+            setTempInputMsg("");
+            props.setInputMsg(tempInputMsg);
+          }}
           type="submit"
         >
           Send message

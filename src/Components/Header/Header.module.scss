@@ -1,10 +1,36 @@
 .header {
-    grid-area: header;
-    background-color: #50c878;
+  grid-area: header;
+  background-color: #50c878;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 .header__logo {
-    display: block;
-    width: 60px;
-    height: auto;
-    padding: 0 10px;
+  display: block;
+  width: 60px;
+  height: auto;
+  padding: 0 10px;
+}
+
+// .loginLink {
+//   display: flex;
+//   align-items: center;
+//   text-decoration: none;
+// }
+.login {
+  padding: 0 10px;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+
+  cursor: pointer;
+}
+.photo {
+  display: block;
+  width: 50px;
+  height: auto;
+
+  border: 1px solid #fff;
+  border-radius: 50%;
 }
