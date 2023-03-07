@@ -1,6 +1,5 @@
 import React from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import userImg from "../../Assets/userImg.png";
+import { NavLink, useNavigate } from "react-router-dom";
 import c from "./Header.module.scss";
 
 function Header(props) {

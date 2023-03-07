@@ -19,6 +19,18 @@ export const API = {
     const response = await instance.get(`/auth/me`);
     return response.data;
   },
+  async login(email, password, rememberMe) {
+    const response = await instance.post(`/auth/login`, {
+      email,
+      password,
+      rememberMe,
+    });
+    return response.data;
+  },
+  async logout() {
+    const response = await instance.delete(`/auth/login`);
+    return response.data;
+  },
   async getProfile(id) {
     const response = await instance.get(`/profile/${id}`);
     return response.data;
@@ -29,6 +41,25 @@ export const API = {
   },
   async postFollow(id) {
     const response = await instance.post(`/follow/${id}`);
+    return response.data;
+  },
+  async getStatus(id) {
+    const response = await instance.get(`/profile/status/${id}`);
+    return response.data;
+  },
+  async setStatus(obj) {
+    const response = await instance.put(`/profile/status`, { status: obj });
+    return response.data;
+  },
+  async savePhoto(img) {
+    let formData = new FormData();
+    formData.append("image", img);
+
+    const response = await instance.put(`/profile/photo`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   },
 };

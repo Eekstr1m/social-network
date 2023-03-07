@@ -1,30 +1,24 @@
 import React from "react";
-import userImg from "../../../Assets/userImg.png";
 import Preloader from "../../common/Preloader/Preloader";
+import Image from "./Image/Image";
 import c from "./ProfileUser.module.scss";
 import Social from "./Social/Social";
+import Status from "./Status/Status";
 
-function ProfileUser({ profileData }) {
+function ProfileUser({ profileData, isUserAuth, authUserData }) {
   return (
     <>
       {profileData ? (
         <div className={c.user__profile}>
           <div className={c.user}>
-            <div className={c.user__photo}>
-              <img
-                className={c.user__img}
-                src={
-                  profileData.photos.large
-                    ? profileData.photos.large
-                    : profileData.photos.small
-                    ? profileData.photos.small
-                    : userImg
-                }
-                alt="ProfileImage"
-              />
-            </div>
+            <Image
+              profileData={profileData}
+              isUserAuth={isUserAuth}
+              authUserData={authUserData}
+            />
             <div className={c.user__content}>
               <div className={c.user__name}>{profileData.fullName}</div>
+              <Status isUserAuth={isUserAuth} authUserData={authUserData} />
               <div className={c.user__description}>{profileData.aboutMe}</div>
               <div className={c.user__job}>
                 {profileData.lookingForAJob ? (

@@ -12,7 +12,7 @@ function Messages(props) {
     { id: 2, msgText: "How are u?" },
     { id: 3, msgText: "Good" },
   ]);
-  const [usersData, setUsersData] = useState([
+  const [usersData] = useState([
     { id: 1, name: "Vlad", img: "https://place-hold.it/50/871" },
     { id: 2, name: "Andrew", img: "https://place-hold.it/50/571" },
     { id: 3, name: "Dmitri", img: "https://place-hold.it/50/261" },

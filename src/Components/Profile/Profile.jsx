@@ -20,7 +20,11 @@ function Profile({ isUserAuth, authUserData }) {
 
   return (
     <div className={c.profile}>
-      <ProfileUser profileData={profileData} />
+      <ProfileUser
+        profileData={profileData}
+        isUserAuth={isUserAuth}
+        authUserData={authUserData}
+      />
 
       {isUserAuth && authUserData.id === +userId ? (
         <NewPost setInputMsg={setInputMsg} />

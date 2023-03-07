@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { API } from "../../API/api";
 import Preloader from "../common/Preloader/Preloader";
 import userImg from "./../../Assets/userImg.png";
 import c from "./Users.module.scss";
 
 const getPagination = (activePage, totalUsersCount, pageSize) => {
+  activePage = +activePage;
   const offset = 2;
   const totalPageNumber = Math.ceil(totalUsersCount / pageSize);
   const offsetNumber =
@@ -41,6 +42,9 @@ const getPagination = (activePage, totalUsersCount, pageSize) => {
 };
 
 function Users() {
+  const { aPage } = useParams();
+  let navigate = useNavigate();
+
   const [isFollowingProcess, setFollowingProcess] = useState(false);
   const [isFetching, setIsFetching] = useState(false); // Read about useTransition
 
@@ -62,11 +66,15 @@ function Users() {
     });
   }, [activePage, pageSize]);
 
+  useEffect(() => {
+    setActivePage(aPage);
+  }, [aPage]);
+
   let paginationList = getPagination(activePage, totalUsersCount, pageSize);
 
   useEffect(() => {
-    setUsersData(
-      usersData.map((el) => {
+    setUsersData((u) =>
+      u.map((el) => {
         if (el.id === userFollow) el.followed = true;
         return el;
       })
@@ -78,8 +86,8 @@ function Users() {
   }, [userFollow]);
 
   useEffect(() => {
-    setUsersData(
-      usersData.map((el) => {
+    setUsersData((u) =>
+      u.map((el) => {
         if (el.id === userUnFollow) el.followed = false;
         return el;
       })
@@ -103,10 +111,10 @@ function Users() {
                   <span
                     key={index}
                     onClick={() => {
-                      setActivePage(page);
+                      navigate(`/users/${page}`);
                     }}
                     className={
-                      activePage === page ? `${c.item} ${c.selected}` : c.item
+                      +activePage === page ? `${c.item} ${c.selected}` : c.item
                     }
                   >
                     {page}

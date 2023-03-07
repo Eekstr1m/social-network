@@ -7,8 +7,8 @@ function SideBarItems(props) {
     <div className={c.item}>
       <NavLink
         to={props.link}
-        className={(navData) =>
-          navData.isActive ? `${c.item__link} ${c.activeLink}` : c.item__link
+        className={({ isActive }) =>
+          isActive ? `${c.item__link} ${c.activeLink}` : c.item__link
         }
       >
         {props.linkName}
