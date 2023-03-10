@@ -1,9 +1,18 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { API } from "../../API/api";
 import c from "./Header.module.scss";
 
-function Header(props) {
+function Header({ isUserAuth, authUserData, setIsChanged }) {
   const navigate = useNavigate();
+
+  const onLogOut = () => {
+    API.logout().then((res) => {
+      if (res.resultCode === 0) {
+        setIsChanged();
+      }
+    });
+  };
 
   return (
     <header className={c.header}>
@@ -13,13 +22,26 @@ function Header(props) {
         alt=""
       />
       <div className={c.login__block}>
-        {props.isUserAuth ? (
-          <div
-            onClick={() => navigate(`/profile/${props.authUserData.id}`)}
-            className={c.login}
-          >
-            {props.authUserData.login}
-          </div>
+        {isUserAuth ? (
+          <nav className={c.nav}>
+            <ul className={c.nav_list}>
+              <li className={c.nav_item}>
+                <div className={c.nav_link}>{authUserData.login}</div>
+
+                <ul className={c.subNav}>
+                  <li
+                    onClick={() => navigate(`/profile/${authUserData.id}`)}
+                    className={c.subNav_item}
+                  >
+                    My Profile
+                  </li>
+                  <li onClick={onLogOut} className={c.subNav_item}>
+                    Log Out
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
         ) : (
           <NavLink to={"/login"} className={c.login}>
             Login
@@ -31,11 +53,3 @@ function Header(props) {
 }
 
 export default Header;
-
-// <NavLink
-//             onClick={() => navigate("/login")}
-//             //to={`/profile/${props.authUserData.id}`}
-//             className={c.loginLink}
-//           >
-//             <div onClick={} className={c.login}>{props.authUserData.login}</div>
-//           </NavLink>

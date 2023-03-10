@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import c from "./SideBarItem.module.scss";
 
-function SideBarItems(props) {
+function SideBarItem(props) {
   return (
     <div className={c.item}>
       <NavLink
@@ -17,4 +17,4 @@ function SideBarItems(props) {
   );
 }
 
-export default SideBarItems;
+export default SideBarItem;

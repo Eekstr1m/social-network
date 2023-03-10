@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import c from "./Sidebar.module.scss";
-import SideBarItems from "./SideBarItem/SideBarItem";
+import SideBarItem from "./SideBarItem/SideBarItem";
 
 function Sidebar({ isUserAuth, authUserData }) {
   const [sidebarLinks, setSidebarLinks] = useState([]);
@@ -21,25 +21,17 @@ function Sidebar({ isUserAuth, authUserData }) {
         { link: "/users", linkName: "Users" },
       ]);
     }
-  }, [authUserData.id, isUserAuth]);
+  }, [isUserAuth]);
 
   return (
     <nav className={c.sidebar}>
-      {isUserAuth
-        ? sidebarLinks.map((obj, index) => (
-            <SideBarItems
-              key={index}
-              link={obj["link"]}
-              linkName={obj["linkName"]}
-            />
-          ))
-        : sidebarLinks.map((obj, index) => (
-            <SideBarItems
-              key={index}
-              link={obj["link"]}
-              linkName={obj["linkName"]}
-            />
-          ))}
+      {sidebarLinks.map((obj, index) => (
+        <SideBarItem
+          key={index}
+          link={obj["link"]}
+          linkName={obj["linkName"]}
+        />
+      ))}
     </nav>
   );
 }

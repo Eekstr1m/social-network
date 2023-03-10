@@ -22,7 +22,7 @@ const useToggle = (initialState = false) => {
 };
 
 function App() {
-  const [authorized, setAuthorized] = useState(false);
+  const [initialization, setInitialization] = useState(false);
 
   const [authUserData, setAuthUserData] = useState(null);
   const [isUserAuth, setIsUserAuth] = useState(false);
@@ -30,19 +30,19 @@ function App() {
   const [isChanged, setIsChanged] = useToggle();
 
   useEffect(() => {
-    API.getAuthMe()
-      .then((data) => {
-        if (data.resultCode === 0) {
-          setAuthUserData(data.data);
-          setIsUserAuth(true);
-        } else {
-          setIsUserAuth(false);
-          setAuthUserData(null);
-        }
-      })
-      .then((_) => {
-        setAuthorized(true);
-      });
+    const fetchData = async () => {
+      const data = await API.getAuthMe();
+      if (data.resultCode === 0) {
+        setAuthUserData(data.data);
+        setIsUserAuth(true);
+      } else {
+        setIsUserAuth(false);
+        setAuthUserData(null);
+      }
+      setInitialization(true);
+    };
+
+    fetchData();
   }, [isChanged]);
 
   const withAuthRedirect = (Component) => {
@@ -70,9 +70,13 @@ function App() {
 
   return (
     <div className="app-wrapper">
-      {authorized ? (
+      {initialization ? (
         <>
-          <Header isUserAuth={isUserAuth} authUserData={authUserData} />
+          <Header
+            isUserAuth={isUserAuth}
+            authUserData={authUserData}
+            setIsChanged={setIsChanged}
+          />
           <Sidebar isUserAuth={isUserAuth} authUserData={authUserData} />
           <div className="app-wrapper__content">
             <Suspense fallback={<Preloader />}>
@@ -97,10 +101,7 @@ function App() {
                   <Route path=":aPage" element={<Users />} />
                   <Route path="" element={<Navigate to={`/users/1`} />} />
                 </Route>
-                <Route
-                  path="/settings"
-                  element={<SettingsComponent setIsChanged={setIsChanged} />}
-                />
+                <Route path="/settings" element={<SettingsComponent />} />
                 <Route
                   path="/login"
                   element={<RedirectToProfile setIsChanged={setIsChanged} />}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API } from "../../../../API/api";
 import c from "./Status.module.scss";
@@ -10,12 +10,16 @@ function Status({ authUserData, isUserAuth }) {
   const [statusText, setStatusText] = useState("");
   const [statusInputText, setStatusInputText] = useState("");
 
-  useEffect(() => {
-    API.getStatus(userId).then((data) => {
-      setStatusText(data);
-      setStatusInputText(data);
-    });
+  const fetchGetStatus = useCallback(async () => {
+    const data = await API.getStatus(userId);
+
+    setStatusText(data);
+    setStatusInputText(data);
   }, [userId]);
+
+  useEffect(() => {
+    fetchGetStatus().catch(console.error);
+  }, [fetchGetStatus]);
 
   let submitHandler = (e) => {
     e.preventDefault();
