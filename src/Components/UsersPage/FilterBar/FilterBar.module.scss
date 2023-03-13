@@ -1,0 +1,36 @@
+.search {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+.search_input {
+  width: 200px;
+  height: 30px;
+
+  outline: none;
+  border: none;
+
+  color: #fff;
+  background-color: #50c878;
+  border-radius: 7px;
+  padding: 0 10px;
+
+  transition: background-color 0.2s linear;
+
+  &::placeholder {
+    color: darken(#fff, 5%);
+  }
+
+  &:focus {
+    background-color: darken(#50c878, 10%);
+  }
+}
+.filters {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  margin-top: 10px;
+}
+.filter_item {
+  margin-bottom: 10px;
+}
