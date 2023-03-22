@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../API/api";
 import NewPost from "./Posts/NewPost/NewPost";
 import PostsList from "./Posts/PostsList/PostsList";
@@ -8,6 +8,7 @@ import ProfileUser from "./User/ProfileUser";
 
 function Profile({ isUserAuth, authUserData }) {
   let { userId } = useParams();
+  let navigate = useNavigate();
 
   const [inputMsg, setInputMsg] = useState("");
   const [profileData, setProfileData] = useState();
@@ -18,6 +19,14 @@ function Profile({ isUserAuth, authUserData }) {
     });
   }, [userId]);
 
+  const onSendMessageHandle = async (userId) => {
+    const response = await API.startChat(userId);
+
+    if (response.resultCode === 0) {
+      navigate(`/messages/${userId}`);
+    }
+  };
+
   return (
     <div className={c.profile}>
       <ProfileUser
@@ -25,6 +34,16 @@ function Profile({ isUserAuth, authUserData }) {
         isUserAuth={isUserAuth}
         authUserData={authUserData}
       />
+
+      {isUserAuth && authUserData.id !== +userId ? (
+        <div
+          onClick={() => {
+            onSendMessageHandle(userId);
+          }}
+        >
+          Send Message
+        </div>
+      ) : null}
 
       {isUserAuth && authUserData.id === +userId ? (
         <NewPost setInputMsg={setInputMsg} />

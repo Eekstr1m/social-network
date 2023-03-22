@@ -1,7 +1,12 @@
-.preloader {
+.preloader_box {
+  width: 100%;
   height: 100%;
-  display: grid;
-  place-items: center;
+}
+.preloader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
 }
 .loader {
   width: 48px;

@@ -12,19 +12,17 @@ function FilterBar({ setFriendParam, setTermParam, setActivePage }) {
   const unfollowed = "unfollowed";
 
   useEffect(() => {
+    setActivePage(1);
     switch (pickedState) {
       case followed:
-        setActivePage(1);
         setFriendParam(true);
         break;
 
       case unfollowed:
-        setActivePage(1);
         setFriendParam(false);
         break;
 
       default:
-        setActivePage(1);
         setFriendParam("");
         break;
     }

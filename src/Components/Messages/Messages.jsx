@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { API } from "../../API/api";
 import ActiveDialog from "./ActiveDialog/ActiveDialog";
 import c from "./Messages.module.scss";
 import SendNewMessage from "./SendNewMessage/SendNewMessage";
 import UserMessage from "./UserMessage/UserMessage";
 
-function Messages(props) {
+function Messages() {
+  let { dialogId } = useParams();
   const [inputMsg, setInputMsg] = useState("");
 
-  const [dialogData, setDialogData] = useState([
-    { id: 1, msgText: "Hi" },
-    { id: 2, msgText: "How are u?" },
-    { id: 3, msgText: "Good" },
-  ]);
-  const [usersData] = useState([
-    { id: 1, name: "Vlad", img: "https://place-hold.it/50/871" },
-    { id: 2, name: "Andrew", img: "https://place-hold.it/50/571" },
-    { id: 3, name: "Dmitri", img: "https://place-hold.it/50/261" },
-    { id: 4, name: "Alexandra", img: "https://place-hold.it/50/548" },
-  ]);
+  const [isFetching, setIsFetching] = useState(false);
+
+  const [dialogData, setDialogData] = useState([]);
+  const [usersData, setUsersData] = useState([]);
 
   useEffect(() => {
-    let copy = structuredClone(dialogData);
-    copy.push({ id: dialogData.length + 1, msgText: inputMsg });
+    API.getDialogs().then((data) => setUsersData(data));
+  }, []);
 
-    setDialogData(copy);
+  useEffect(() => {
+    if (dialogId) {
+      API.getMessages(dialogId).then((data) => {
+        setDialogData(data.items);
+      });
+    }
+  }, [dialogId]);
+
+  useEffect(() => {
+    if (inputMsg) {
+      let copy = structuredClone(dialogData);
+
+      API.getLastSendedMessage(dialogId).then((data) => {
+        copy.push(data.items[0]);
+        setDialogData(copy);
+      });
+    }
 
     return () => {
       setInputMsg("");
@@ -33,24 +45,21 @@ function Messages(props) {
   return (
     <div className={c.messages}>
       <div className={c.message}>
-        {usersData.map((item) => (
-          <UserMessage
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            img={item.img}
-          />
-        ))}
+        {usersData &&
+          usersData.map((item) => <UserMessage key={item.id} item={item} />)}
       </div>
-      <div className={c.dialog}>
-        <div className={c.dialog__messages}>
-          {dialogData.map((item) => (
-            <ActiveDialog key={item.id} msgText={item.msgText} />
-          ))}
+      {dialogId && (
+        <div className={c.dialog}>
+          <div className={c.dialog__messages}>
+            {dialogData &&
+              dialogData.map((item) => (
+                <ActiveDialog key={item.id} msgText={item.body} />
+              ))}
+          </div>
+          {console.log(dialogData)}
+          <SendNewMessage setInputMsg={setInputMsg} />
         </div>
-
-        <SendNewMessage setInputMsg={setInputMsg} />
-      </div>
+      )}
     </div>
   );
 }

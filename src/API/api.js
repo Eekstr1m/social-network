@@ -5,6 +5,7 @@ const instance = axios.create({
   withCredentials: true,
   headers: {
     "API-KEY": "d0ce4cd8-d0d2-4152-99ad-f6e1407cb23f",
+    // "API-KEY": "f93a8867-ab51-42b4-9ff9-3afc8f0267b8",
   },
 });
 
@@ -59,6 +60,28 @@ export const API = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+    });
+    return response.data;
+  },
+  async getDialogs() {
+    const response = await instance.get(`/dialogs`);
+    return response.data;
+  },
+  async getMessages(userId) {
+    const response = await instance.get(`/dialogs/${userId}/messages`);
+    return response.data;
+  },
+  async getLastSendedMessage(userId) {
+    const response = await instance.get(`/dialogs/${userId}/messages?count=1`);
+    return response.data;
+  },
+  async startChat(userId) {
+    const response = await instance.put(`/dialogs/${userId}`);
+    return response.data;
+  },
+  async sendMessage(userId, message) {
+    const response = await instance.post(`/dialogs/${userId}/messages`, {
+      body: message,
     });
     return response.data;
   },

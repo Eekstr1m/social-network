@@ -18,5 +18,9 @@
 
   .message__img {
     border-radius: 50%;
+    display: block;
+    width: 100%;
+    max-width: 60px;
+    height: auto;
   }
 }

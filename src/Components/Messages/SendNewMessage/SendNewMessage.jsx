@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { API } from "../../../API/api";
 import c from "./SendNewMessage.module.scss";
 
 function SendNewMessage(props) {
+  let { dialogId } = useParams();
+
   const [tempInputMsg, setTempInputMsg] = useState("");
+
   return (
     <div className={c.newMessage}>
       <div className={c.newMessage__text}>
@@ -21,7 +26,12 @@ function SendNewMessage(props) {
           className={c.newMessage__btn}
           onClick={() => {
             setTempInputMsg("");
-            props.setInputMsg(tempInputMsg);
+            console.log(tempInputMsg.trim());
+            API.sendMessage(+dialogId, tempInputMsg.trim()).then((data) => {
+              if (data.resultCode === 0) {
+                props.setInputMsg(tempInputMsg);
+              }
+            }); // resultCode 0 available
           }}
           type="submit"
         >

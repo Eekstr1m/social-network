@@ -61,6 +61,18 @@ function App() {
     return RedirectComponent;
   };
 
+  const withLoginRedirect = () => {
+    function RedirectComponent() {
+      if (isUserAuth) {
+        return <Navigate to={`/profile/${authUserData.id}`} />;
+      }
+      return <Navigate to={`/login`} />;
+    }
+    return RedirectComponent;
+  };
+
+  const RedirectToLogin = withLoginRedirect();
+
   const MessagesComponent = withAuthRedirect(Messages);
   const NewsComponent = withAuthRedirect(News);
   const MusicComponent = withAuthRedirect(Music);
@@ -81,7 +93,7 @@ function App() {
           <div className="app-wrapper__content">
             <Suspense fallback={<Preloader />}>
               <Routes>
-                <Route path="" element={<RedirectToProfile />} />
+                <Route path="" element={<RedirectToLogin />} />
                 <Route path="/profile">
                   <Route
                     path=":userId"
@@ -92,9 +104,12 @@ function App() {
                       />
                     }
                   />
-                  <Route path="" element={<RedirectToProfile />} />
+                  <Route path="" element={<RedirectToLogin />} />
                 </Route>
-                <Route path="/messages/*" element={<MessagesComponent />} />
+                <Route path="/messages">
+                  <Route path=":dialogId" element={<MessagesComponent />} />
+                  <Route path="" element={<MessagesComponent />} />
+                </Route>
                 <Route path="/news" element={<NewsComponent />} />
                 <Route path="/music" element={<MusicComponent />} />
                 <Route path="/users">
