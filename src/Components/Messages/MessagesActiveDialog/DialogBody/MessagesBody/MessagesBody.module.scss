@@ -1,0 +1,31 @@
+.message {
+  margin: 5px 0;
+
+  &.myMessage {
+    text-align: right;
+  }
+}
+.message__wrapper {
+  display: inline-block;
+  border: 1px #000 solid;
+  border-radius: 20px;
+
+  padding: 3px 10px;
+
+  max-width: 50%;
+  height: auto;
+}
+.time {
+  font-size: 12px;
+  padding-left: 10px;
+
+  height: 100%;
+  display: flex;
+  align-items: end;
+}
+.message__content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: end;
+}

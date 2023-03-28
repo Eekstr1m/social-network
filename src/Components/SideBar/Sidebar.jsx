@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthUserDataContext } from "../../App";
 import c from "./Sidebar.module.scss";
 import SideBarItem from "./SideBarItem/SideBarItem";
 
-function Sidebar({ isUserAuth, authUserData }) {
+function Sidebar() {
+  const { authUserData, isUserAuth } = useContext(AuthUserDataContext);
   const [sidebarLinks, setSidebarLinks] = useState([]);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function Sidebar({ isUserAuth, authUserData }) {
         { link: "/users", linkName: "Users" },
       ]);
     }
-  }, [isUserAuth]);
+  }, [authUserData.id, isUserAuth]);
 
   return (
     <nav className={c.sidebar}>

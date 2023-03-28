@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { API } from "../../API/api";
+import { AuthUserDataContext } from "../../App";
 import c from "./Header.module.scss";
 
-function Header({ isUserAuth, authUserData, setIsChanged }) {
+function Header() {
   const navigate = useNavigate();
+  const { authUserData, isUserAuth, setIsChanged } =
+    useContext(AuthUserDataContext);
 
   const onLogOut = () => {
     API.logout().then((res) => {

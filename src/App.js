@@ -1,4 +1,10 @@
-import React, { Suspense, useCallback, useEffect, useState } from "react";
+import React, {
+  createContext,
+  Suspense,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { API } from "./API/api";
 import "./App.scss";
@@ -6,9 +12,10 @@ import "./App.scss";
 import Preloader from "./Components/common/Preloader/Preloader";
 import Header from "./Components/Header/Header";
 import Sidebar from "./Components/SideBar/Sidebar";
+
 const Messages = React.lazy(() => import("./Components/Messages/Messages"));
 const Music = React.lazy(() => import("./Components/Music/Music"));
-const News = React.lazy(() => import("./Components/News/News"));
+const Chat = React.lazy(() => import("./Components/Chat/Chat"));
 const NotFound = React.lazy(() => import("./Components/NotFound/NotFound"));
 const Settings = React.lazy(() => import("./Components/Settings/Settings"));
 const Users = React.lazy(() => import("./Components/UsersPage/Users"));
@@ -20,6 +27,8 @@ const useToggle = (initialState = false) => {
   const toggle = useCallback(() => setState((state) => !state), []);
   return [state, toggle];
 };
+
+export const AuthUserDataContext = createContext(null);
 
 function App() {
   const [initialization, setInitialization] = useState(false);
@@ -74,7 +83,7 @@ function App() {
   const RedirectToLogin = withLoginRedirect();
 
   const MessagesComponent = withAuthRedirect(Messages);
-  const NewsComponent = withAuthRedirect(News);
+  const ChatComponent = withAuthRedirect(Chat);
   const MusicComponent = withAuthRedirect(Music);
   const SettingsComponent = withAuthRedirect(Settings);
 
@@ -84,47 +93,36 @@ function App() {
     <div className="app-wrapper">
       {initialization ? (
         <>
-          <Header
-            isUserAuth={isUserAuth}
-            authUserData={authUserData}
-            setIsChanged={setIsChanged}
-          />
-          <Sidebar isUserAuth={isUserAuth} authUserData={authUserData} />
-          <div className="app-wrapper__content">
-            <Suspense fallback={<Preloader />}>
-              <Routes>
-                <Route path="" element={<RedirectToLogin />} />
-                <Route path="/profile">
-                  <Route
-                    path=":userId"
-                    element={
-                      <Profile
-                        isUserAuth={isUserAuth}
-                        authUserData={authUserData}
-                      />
-                    }
-                  />
+          <AuthUserDataContext.Provider
+            value={{ authUserData, isUserAuth, setIsChanged }}
+          >
+            <Header />
+            <Sidebar />
+            <div className="app-wrapper__content">
+              <Suspense fallback={<Preloader />}>
+                <Routes>
                   <Route path="" element={<RedirectToLogin />} />
-                </Route>
-                <Route path="/messages">
-                  <Route path=":dialogId" element={<MessagesComponent />} />
-                  <Route path="" element={<MessagesComponent />} />
-                </Route>
-                <Route path="/news" element={<NewsComponent />} />
-                <Route path="/music" element={<MusicComponent />} />
-                <Route path="/users">
-                  <Route path=":aPage" element={<Users />} />
-                  <Route path="" element={<Navigate to={`/users/1`} />} />
-                </Route>
-                <Route path="/settings" element={<SettingsComponent />} />
-                <Route
-                  path="/login"
-                  element={<RedirectToProfile setIsChanged={setIsChanged} />}
-                />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </div>
+                  <Route path="/profile">
+                    <Route path=":userId" element={<Profile />} />
+                    <Route path="" element={<RedirectToLogin />} />
+                  </Route>
+                  <Route path="/messages">
+                    <Route path=":dialogId" element={<MessagesComponent />} />
+                    <Route path="" element={<MessagesComponent />} />
+                  </Route>
+                  <Route path="/news" element={<ChatComponent />} />
+                  <Route path="/music" element={<MusicComponent />} />
+                  <Route path="/users">
+                    <Route path=":aPage" element={<Users />} />
+                    <Route path="" element={<Navigate to={`/users/1`} />} />
+                  </Route>
+                  <Route path="/settings" element={<SettingsComponent />} />
+                  <Route path="/login" element={<RedirectToProfile />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </div>
+          </AuthUserDataContext.Provider>
         </>
       ) : (
         <Preloader />

@@ -1,0 +1,58 @@
+.message {
+  margin-bottom: 20px;
+}
+.user__name {
+  text-decoration: none;
+  color: #000;
+  display: flex;
+  // align-items: start;
+  line-height: 1;
+
+  transition: color 0.2s linear;
+}
+.activeUserMessage {
+  background-color: #50c878;
+  color: #fff;
+}
+.message__photo {
+  padding-right: 10px;
+
+  .message__img {
+    border-radius: 50%;
+    display: block;
+    width: 100%;
+    width: 60px;
+    height: auto;
+  }
+}
+
+.last__message {
+  color: rgba(#000, 0.5);
+}
+
+.message__info {
+  width: 100%;
+  height: auto;
+
+  display: flex;
+  // text-align: right;
+  // justify-content: end;
+  align-items: flex-end;
+  flex-direction: column;
+  vertical-align: top;
+}
+
+.new__message {
+  width: 18px;
+  height: 18px;
+
+  text-align: center;
+  line-height: 1;
+
+  margin-top: 5px;
+
+  color: #000;
+  background-color: aqua;
+  // border: 1px #000 solid;
+  border-radius: 50%;
+}

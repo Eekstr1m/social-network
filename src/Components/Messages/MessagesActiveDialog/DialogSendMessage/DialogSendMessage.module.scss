@@ -1,0 +1,30 @@
+.form {
+  height: 30px;
+  width: 100%;
+  color: #fff;
+  background-color: #50c878;
+
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.input {
+  color: inherit;
+  border: none;
+  padding: 0 10px;
+  background: transparent;
+
+  &::placeholder {
+    color: darken(#fff, 5%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+.submit {
+  color: inherit;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -68,7 +68,7 @@ export const API = {
     return response.data;
   },
   async getMessages(userId) {
-    const response = await instance.get(`/dialogs/${userId}/messages`);
+    const response = await instance.get(`/dialogs/${userId}/messages?count=20`);
     return response.data;
   },
   async getLastSendedMessage(userId) {

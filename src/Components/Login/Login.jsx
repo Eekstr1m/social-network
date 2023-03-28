@@ -1,10 +1,12 @@
 import { Form, Formik, useField } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import * as Yup from "yup";
 import { API } from "../../API/api";
+import { AuthUserDataContext } from "../../App";
 import c from "./Login.module.scss";
 
-function Login({ setIsChanged }) {
+function Login() {
+  const { setIsChanged } = useContext(AuthUserDataContext);
   return <LoginForm setIsChanged={setIsChanged} />;
 }
 

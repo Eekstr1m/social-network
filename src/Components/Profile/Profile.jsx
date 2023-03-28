@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { API } from "../../API/api";
+import { AuthUserDataContext } from "../../App";
 import NewPost from "./Posts/NewPost/NewPost";
 import PostsList from "./Posts/PostsList/PostsList";
 import c from "./Profile.module.scss";
 import ProfileUser from "./User/ProfileUser";
 
-function Profile({ isUserAuth, authUserData }) {
+function Profile() {
   let { userId } = useParams();
   let navigate = useNavigate();
+  const { authUserData, isUserAuth } = useContext(AuthUserDataContext);
 
   const [inputMsg, setInputMsg] = useState("");
   const [profileData, setProfileData] = useState();
