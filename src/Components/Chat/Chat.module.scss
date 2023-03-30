@@ -1,0 +1,53 @@
+.messages {
+  height: calc(60vh - 30px);
+  overflow: auto;
+}
+.image {
+  display: block;
+  width: 40px;
+  height: auto;
+}
+.messageItem {
+  display: flex;
+  padding: 10px 0;
+}
+.message_body {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+.userName {
+  font-weight: 700;
+}
+
+// form
+.form {
+  height: 30px;
+  width: 300px;
+  color: #fff;
+  background-color: #50c878;
+
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.input {
+  color: inherit;
+  border: none;
+  padding: 0 10px;
+  background: transparent;
+
+  &::placeholder {
+    color: darken(#fff, 5%);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+.submit {
+  color: inherit;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

@@ -110,7 +110,7 @@ function App() {
                     <Route path=":dialogId" element={<MessagesComponent />} />
                     <Route path="" element={<MessagesComponent />} />
                   </Route>
-                  <Route path="/news" element={<ChatComponent />} />
+                  <Route path="/chat" element={<ChatComponent />} />
                   <Route path="/music" element={<MusicComponent />} />
                   <Route path="/users">
                     <Route path=":aPage" element={<Users />} />

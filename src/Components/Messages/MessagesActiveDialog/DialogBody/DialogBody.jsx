@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import c from "./DialogBody.module.scss";
 import MessagesBody from "./MessagesBody/MessagesBody";
 
 export default function DialogBody({ dialogData, authUserData }) {
+  const newMessageRef = useRef(null);
+
+  useEffect(() => {
+    if (newMessageRef.current) {
+      newMessageRef.current.scrollIntoView();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (newMessageRef.current) {
+      newMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [dialogData]);
+
   return (
     <div className={c.dialog}>
       <div className={c.dialog_messages}>
@@ -20,6 +34,7 @@ export default function DialogBody({ dialogData, authUserData }) {
             <div>Send first one</div>
           </div>
         )}
+        <div ref={newMessageRef}></div>
       </div>
     </div>
   );

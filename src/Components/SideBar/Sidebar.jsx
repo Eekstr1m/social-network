@@ -12,7 +12,7 @@ function Sidebar() {
       setSidebarLinks([
         { link: `/profile/${authUserData.id}`, linkName: "My profile" },
         { link: "/messages", linkName: "Messages" },
-        { link: "/news", linkName: "News" },
+        { link: "/chat", linkName: "Chat" },
         { link: "/music", linkName: "Music" },
         { link: "/users", linkName: "Users" },
         { link: "/settings", linkName: "Settings" },
