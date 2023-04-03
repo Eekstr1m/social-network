@@ -1,0 +1,21 @@
+.messages {
+  height: calc(60vh - 30px);
+  overflow: auto;
+}
+.image {
+  display: block;
+  width: 40px;
+  height: auto;
+}
+.messageItem {
+  display: flex;
+  padding: 10px 0;
+}
+.message_body {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+.userName {
+  font-weight: 700;
+}

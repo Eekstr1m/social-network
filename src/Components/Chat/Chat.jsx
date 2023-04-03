@@ -1,87 +1,124 @@
 import { Field, Form, Formik } from "formik";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { AuthUserDataContext } from "../../App";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import userImage from "./../../Assets/userImg.png";
 import c from "./Chat.module.scss";
 
-// const ws = new WebSocket(
-//   "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
-// );
+const useToggle = (initialState = false) => {
+  const [state, setState] = useState(initialState);
+  const toggle = useCallback(() => setState((state) => !state), []);
+  return [state, toggle];
+};
 
 function Chat() {
-  const { authUserData } = useContext(AuthUserDataContext);
+  const [messages, setMessages] = useState([]);
 
   const [wsChannel, setWsChannel] = useState(null);
+  const [status, setStatus] = useState("pending");
+  const [isReconnect, setIsReconnect] = useToggle();
 
   useEffect(() => {
-    let ws;
+    let socket;
+
     const closeHandler = () => {
-      console.log("CLOSE WS");
-      setTimeout(createChannel, 3000);
+      console.log("close");
+      setStatus("pending");
+
+      setMessages([]);
     };
 
-    function createChannel() {
-      if (ws) {
-        ws.removeEventListener("close", closeHandler);
-        ws.close();
+    const openHandler = (e) => {
+      console.log("connected");
+      setStatus("ready");
+    };
+
+    const messageHandler = (e) => {
+      console.log("messages");
+      let newMessages = JSON.parse(e.data);
+      setMessages((prevMessages) => [...prevMessages, ...newMessages]);
+    };
+
+    const errorHandler = (e) => {
+      console.log("error");
+    };
+
+    const EVENT_ADD = "addEventListener";
+    const EVENT_REMOVE = "removeEventListener";
+
+    const eventListeners = (ws, type) => {
+      switch (type) {
+        case EVENT_ADD:
+          ws.addEventListener("open", openHandler);
+          ws.addEventListener("message", messageHandler);
+          ws.addEventListener("close", closeHandler);
+          ws.addEventListener("error", errorHandler);
+          break;
+
+        case EVENT_REMOVE:
+          ws.removeEventListener("open", openHandler);
+          ws.removeEventListener("message", messageHandler);
+          ws.removeEventListener("close", closeHandler);
+          ws.removeEventListener("error", errorHandler);
+          break;
+
+        default:
+          break;
       }
-      ws = new WebSocket(
+    };
+
+    const createChannel = () => {
+      if (wsChannel) {
+        eventListeners(wsChannel, EVENT_REMOVE);
+        wsChannel.close();
+      }
+      socket = new WebSocket(
         "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
       );
-      ws.addEventListener("close", closeHandler);
-      setWsChannel(ws);
-    }
+
+      eventListeners(socket, EVENT_ADD);
+      setWsChannel(socket);
+    };
 
     createChannel();
 
     return () => {
-      ws.removeEventListener("close", closeHandler);
-      ws.close();
+      socket.close();
     };
-  }, []);
+  }, [isReconnect]);
 
   return (
     <div className={c.chat}>
-      <Messages wsChannel={wsChannel} />
-      <SendMessage wsChannel={wsChannel} />
+      <Messages messages={messages} setIsReconnect={setIsReconnect} />
+      <SendMessage wsChannel={wsChannel} status={status} />
     </div>
   );
 }
 
 export default Chat;
 
-function Messages({ wsChannel }) {
-  const [messages, setMessages] = useState([]);
+function Messages({ messages, setIsReconnect }) {
   const messagesAnchorRef = useRef(null);
 
   useEffect(() => {
-    let messageHandler = (e) => {
-      let newMessages = JSON.parse(e.data);
-      setMessages((prevMessages) => [...prevMessages, ...newMessages]);
-    };
-
-    if (wsChannel) {
-      wsChannel.addEventListener("message", messageHandler);
-    }
-
-    return () => {
-      if (wsChannel) {
-        wsChannel.removeEventListener("message", messageHandler);
-      }
-    };
-  }, [wsChannel]);
-
-  useEffect(() => {
     if (messagesAnchorRef.current) {
-      messagesAnchorRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesAnchorRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+      });
     }
   }, [messages]);
 
   return (
     <div className={c.messages}>
-      {messages.map((item, i) => (
-        <MessageItem key={i} item={item} />
-      ))}
+      {messages.length ? (
+        messages.map((item, i) => <MessageItem key={i} item={item} />)
+      ) : (
+        <div>
+          <div>Connection abort, click button to try reconnect</div>
+          <button onClick={() => setIsReconnect()} type="submit">
+            Reconnect
+          </button>
+        </div>
+      )}
       <div ref={messagesAnchorRef}></div>
     </div>
   );
@@ -100,25 +137,7 @@ function MessageItem({ item }) {
   );
 }
 
-function SendMessage({ wsChannel }) {
-  const [readyStatus, setReadyStatus] = useState("pending");
-
-  useEffect(() => {
-    let openHandler = () => {
-      setReadyStatus("ready");
-    };
-
-    if (wsChannel) {
-      wsChannel.addEventListener("open", openHandler);
-    }
-
-    return () => {
-      if (wsChannel) {
-        wsChannel.removeEventListener("open", openHandler);
-      }
-    };
-  }, [wsChannel]);
-
+function SendMessage({ wsChannel, status }) {
   const onSubmitHandler = (values, { setSubmitting, resetForm }) => {
     if (!values.messageText) {
       return;
@@ -142,7 +161,7 @@ function SendMessage({ wsChannel }) {
             />
 
             <button
-              disabled={wsChannel === null || readyStatus !== "ready"}
+              disabled={status !== "ready"}
               className={c.submit}
               type="submit"
             >
