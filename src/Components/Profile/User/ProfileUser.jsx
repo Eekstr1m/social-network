@@ -20,14 +20,13 @@ const UserInfoBg = styled.div.attrs((props) => ({
   position: relative;
 
   background: #ccc;
-  background: linear-gradient(
-    90deg,
-    ${(props) => props.backgroundColor[0]},
-    ${(props) => props.backgroundColor[1]}
-  );
+  background: linear-gradient(90deg, #ccc);
 
   border-radius: 10px;
 `;
+
+// ${(props) => props.backgroundColor[0]},
+//     ${(props) => props.backgroundColor[1]}
 
 function ProfileUser({ profileData, isUserAuth, authUserData }) {
   let { userId } = useParams();
