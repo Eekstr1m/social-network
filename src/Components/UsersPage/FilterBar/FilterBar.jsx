@@ -54,7 +54,7 @@ function FilterBar({ setFriendParam, setTermParam, setActivePage }) {
           setSubmitting(false);
         }}
       >
-        {({ values, setValues, isSubmitting, resetForm }) => (
+        {({ values, resetForm }) => (
           <Form>
             <Field
               type="input"

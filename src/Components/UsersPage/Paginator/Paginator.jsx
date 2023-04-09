@@ -53,9 +53,7 @@ function Paginator({ activePage, totalUsersCount, pageSize }) {
               onClick={() => {
                 navigate(`/users/${page}`);
               }}
-              className={
-                +activePage === page ? `${c.item} ${c.selected}` : c.item
-              }
+              className={+activePage === page ? `${c.selected}` : c.item}
             >
               {page}
             </span>

@@ -1,3 +1,4 @@
+@import "./../../common/Vars.scss";
 .paginator {
   display: flex;
   justify-content: center;
@@ -13,16 +14,23 @@
 
   transition: background-color 0.2s linear, transform 0.2s linear;
 
-  &.selected {
-    background-color: #50c878;
-    color: #fff;
-    transform: scale(1.2);
-  }
-
   &:hover {
-    background-color: #ccc;
+    background-color: $light-green;
   }
 }
 .dots {
   margin: 0 10px;
+}
+.selected {
+  padding: 5px 10px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  margin: 0 5px;
+  cursor: pointer;
+
+  transition: background-color 0.2s linear, transform 0.2s linear;
+
+  background-color: $dark-green;
+  color: #fff;
+  transform: scale(1.2);
 }

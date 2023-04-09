@@ -1,22 +1,51 @@
 .post {
   display: flex;
   align-items: center;
-  margin-bottom: 50px;
+  // line-height: 1;
 }
 .post__img {
   display: block;
   width: 100%;
-  min-width: 50px;
+  width: 50px;
   height: auto;
   object-fit: cover;
 
   border-radius: 50%;
 }
+
 .post__content {
   margin-left: 10px;
   width: 100%;
 }
-.post__message {
+.content__userName {
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+}
+.content__message {
+  font-size: 18px;
+  font-weight: 400;
+}
+.content__more {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(#000000, 0.5);
+}
+
+.post__info {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    > .info__icon {
+      color: red;
+    }
+  }
+}
+.info__like {
+  padding-right: 5px;
+  font-size: 16px;
+}
+.info__icon {
+  font-size: 22px;
 }

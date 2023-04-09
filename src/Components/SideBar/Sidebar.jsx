@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthUserDataContext } from "../../App";
-import c from "./Sidebar.module.scss";
 import SideBarItem from "./SideBarItem/SideBarItem";
+import c from "./Sidebar.module.scss";
 
 function Sidebar() {
   const { authUserData, isUserAuth } = useContext(AuthUserDataContext);
@@ -13,7 +13,6 @@ function Sidebar() {
         { link: `/profile/${authUserData.id}`, linkName: "My profile" },
         { link: "/messages", linkName: "Messages" },
         { link: "/chat", linkName: "Chat" },
-        { link: "/music", linkName: "Music" },
         { link: "/users", linkName: "Users" },
         { link: "/settings", linkName: "Settings" },
       ]);
@@ -23,7 +22,7 @@ function Sidebar() {
         { link: "/users", linkName: "Users" },
       ]);
     }
-  }, [authUserData.id, isUserAuth]);
+  }, [isUserAuth]);
 
   return (
     <nav className={c.sidebar}>

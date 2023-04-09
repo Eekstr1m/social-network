@@ -1,3 +1,4 @@
+@import "./../../common/Vars.scss";
 .search {
   margin-bottom: 20px;
   position: relative;
@@ -10,19 +11,18 @@
   outline: none;
   border: none;
 
-  color: #fff;
-  background-color: #50c878;
-  border-radius: 7px;
+  background-color: $light-green;
+  border-radius: 5px;
   padding: 0 10px;
 
   transition: background-color 0.2s linear;
 
   &::placeholder {
-    color: darken(#fff, 5%);
+    color: $gray;
   }
 
   &:focus {
-    background-color: darken(#50c878, 10%);
+    outline: 1px solid $dark-green;
   }
 }
 .filters {
@@ -33,4 +33,7 @@
 }
 .filter_item {
   margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  font-variant: small-caps;
 }

@@ -67,33 +67,6 @@ function Status({ authUserData, isUserAuth }) {
         <div className={c.status__text}>{statusText}</div>
       )}
     </div>
-    // <div>
-    //   <h1>Any place in your app!</h1>
-    //   <Formik
-    //     initialValues={{ text: "" }}
-    //     onSubmit={(values, { setSubmitting }) => {
-    //       console.log(JSON.stringify(values, null, 2));
-    //       setSubmitting(false);
-    //     }}
-    //   >
-    //     {({ isSubmitting, touched, setSubmitting }) => (
-    //       <Form>
-    //         <Field
-    //           onBlur={() => setSubmitting(false)}
-    //           type="text"
-    //           name="text"
-    //         />
-    //         <button
-    //           onClick={() => console.log(touched.text)}
-    //           type="submit"
-    //           disabled={isSubmitting}
-    //         >
-    //           Submit
-    //         </button>
-    //       </Form>
-    //     )}
-    //   </Formik>
-    // </div>
   );
 }
 

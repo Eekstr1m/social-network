@@ -1,5 +1,6 @@
 .user__photo {
   position: relative;
+  z-index: 2;
 }
 .user__img {
   display: block;
@@ -7,6 +8,8 @@
   width: 300px;
   height: auto;
   object-fit: cover;
+
+  border-radius: 10px;
 }
 
 .label {
@@ -18,8 +21,10 @@
   position: absolute;
   top: 0;
   opacity: 0;
+  z-index: 3;
 
   background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
   cursor: pointer;
 
   transition: opacity 0.2s linear;

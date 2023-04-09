@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const Thing = styled.div.attrs((props) => ({}))`
+const Thing = styled.div`
   font-size: 30px;
   text-align: center;
+  padding: 2px 5px;
 
   transition: transform 0.2s linear;
 

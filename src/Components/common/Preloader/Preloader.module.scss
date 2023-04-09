@@ -1,3 +1,4 @@
+@import "./../../common/Vars.scss";
 .preloader_box {
   width: 100%;
   height: 100%;
@@ -28,7 +29,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: #fff;
+  background: $site-bg;
 }
 @keyframes rotation {
   0% {

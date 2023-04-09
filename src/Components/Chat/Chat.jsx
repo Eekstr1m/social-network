@@ -87,7 +87,11 @@ function Chat() {
 
   return (
     <div className={c.chat}>
-      <Messages messages={messages} setIsReconnect={setIsReconnect} />
+      <Messages
+        wsChannel={wsChannel}
+        messages={messages}
+        setIsReconnect={setIsReconnect}
+      />
       <SendMessage wsChannel={wsChannel} status={status} />
     </div>
   );
@@ -95,7 +99,7 @@ function Chat() {
 
 export default Chat;
 
-function Messages({ messages, setIsReconnect }) {
+function Messages({ wsChannel, messages, setIsReconnect }) {
   const messagesAnchorRef = useRef(null);
 
   useEffect(() => {
@@ -109,15 +113,17 @@ function Messages({ messages, setIsReconnect }) {
 
   return (
     <div className={c.messages}>
-      {messages.length ? (
-        messages.map((item, i) => <MessageItem key={i} item={item} />)
-      ) : (
+      {!wsChannel ? (
         <div>
           <div>Connection abort, click button to try reconnect</div>
           <button onClick={() => setIsReconnect()} type="submit">
             Reconnect
           </button>
         </div>
+      ) : messages.length ? (
+        messages.map((item, i) => <MessageItem key={i} item={item} />)
+      ) : (
+        <div>No messages</div>
       )}
       <div ref={messagesAnchorRef}></div>
     </div>

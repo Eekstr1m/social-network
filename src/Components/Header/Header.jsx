@@ -19,14 +19,12 @@ function Header() {
 
   return (
     <header className={c.header}>
-      <img
-        className={c.header__logo}
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Android_O_Preview_Logo.png/1024px-Android_O_Preview_Logo.png"
-        alt=""
-      />
-      <div className={c.login__block}>
-        {isUserAuth ? (
-          <nav className={c.nav}>
+      <div className={c.header_container}>
+        <div className={c.header__name}>
+          Connect<span>U</span>
+        </div>
+        <nav className={c.login__block}>
+          {isUserAuth ? (
             <ul className={c.nav_list}>
               <li className={c.nav_item}>
                 <div className={c.nav_link}>{authUserData.login}</div>
@@ -44,12 +42,12 @@ function Header() {
                 </ul>
               </li>
             </ul>
-          </nav>
-        ) : (
-          <NavLink to={"/login"} className={c.login}>
-            Login
-          </NavLink>
-        )}
+          ) : (
+            <NavLink to={"/login"} className={c.login}>
+              <div className={c.login_link}>Login</div>
+            </NavLink>
+          )}
+        </nav>
       </div>
     </header>
   );

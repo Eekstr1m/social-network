@@ -1,5 +1,11 @@
+@import "./../common/Vars.scss";
+.chat {
+  margin: 0 auto;
+}
 .messages {
   height: calc(60vh - 30px);
+  width: fit-content;
+  min-width: 500px;
   overflow: auto;
 }
 .image {
@@ -22,10 +28,9 @@
 
 // form
 .form {
-  height: 30px;
-  width: 300px;
-  color: #fff;
-  background-color: #50c878;
+  height: 40px;
+  width: 500px;
+  background-color: $light-green;
 
   display: grid;
   grid-template-columns: 9fr 1fr;
@@ -37,15 +42,15 @@
   background: transparent;
 
   &::placeholder {
-    color: darken(#fff, 5%);
+    color: $gray;
   }
 
   &:focus {
-    outline: none;
+    outline: 1px solid $dark-green;
   }
 }
 .submit {
-  color: inherit;
+  color: $gray;
 
   background: transparent;
   border: none;

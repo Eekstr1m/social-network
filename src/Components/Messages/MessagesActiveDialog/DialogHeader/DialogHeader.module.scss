@@ -1,8 +1,10 @@
+@import "./../../../common/Vars.scss";
 .header_box {
   width: 100%;
   height: 100%;
 
-  background-color: #50c878;
+  // margin-top: 15px;
+  background-color: $dark-green;
 }
 .header {
   display: flex;

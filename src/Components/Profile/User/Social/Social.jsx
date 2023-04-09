@@ -1,8 +1,10 @@
 import React from "react";
+import c from "./Social.module.scss";
 import SocialItem from "./SocialItem";
 
 function Social(props) {
   let social;
+  let set = new Set();
   if (props.contacts) {
     social = { ...props.contacts };
 
@@ -12,16 +14,23 @@ function Social(props) {
         delete social[k];
       } else if (v === null || k === "mainLink") {
         delete social[k];
-      }
+      } else set.add(v);
     }
   }
 
   return (
-    <div>
-      {Object.entries(social).map((user, i) => (
-        <SocialItem key={i} classTag={user[0]} value={user[1]} />
-      ))}
-    </div>
+    <>
+      {!!set.size && (
+        <div className={c.social}>
+          <div className={c.social_text}>SOCIAL</div>
+          <div className={c.social_icons}>
+            {Object.entries(social).map((user, i) => (
+              <SocialItem key={i} classTag={user[0]} value={user[1]} />
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

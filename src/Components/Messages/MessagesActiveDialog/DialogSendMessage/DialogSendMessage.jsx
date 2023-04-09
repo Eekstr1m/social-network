@@ -41,7 +41,7 @@ export default function DialogSendMessage({ dialogData, setDialogData }) {
             />
 
             <button disabled={isSubmitting} className={c.submit} type="submit">
-              Send
+              <i className="fa-regular fa-paper-plane"></i>
             </button>
           </Form>
         )}

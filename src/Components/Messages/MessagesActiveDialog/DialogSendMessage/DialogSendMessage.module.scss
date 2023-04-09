@@ -1,30 +1,53 @@
-.form {
-  height: 30px;
-  width: 100%;
-  color: #fff;
-  background-color: #50c878;
-
+@import "./../../../common/Vars.scss";
+.form_box {
   display: grid;
-  grid-template-columns: 9fr 1fr;
+  place-items: center;
+}
+.form {
+  height: 40px;
+  // width: calc(100% - 30px);
+  width: 100%;
+
+  background-color: $light-green;
+
+  position: relative;
+  display: grid;
 }
 .input {
   color: inherit;
   border: none;
-  padding: 0 10px;
+  padding: 0 15px;
   background: transparent;
 
   &::placeholder {
-    color: darken(#fff, 5%);
+    color: $gray;
   }
 
   &:focus {
-    outline: none;
+    outline: 1px solid $dark-green;
   }
 }
 .submit {
-  color: inherit;
+  // color: inherit;
+  color: $gray;
 
-  background: transparent;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background: $dark-green;
   border: none;
   cursor: pointer;
+
+  i {
+    position: relative;
+    left: -1px;
+    color: #fff;
+    font-size: 16px;
+  }
 }

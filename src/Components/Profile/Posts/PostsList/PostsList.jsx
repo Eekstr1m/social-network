@@ -4,7 +4,7 @@ import Preloader from "../../../common/Preloader/Preloader";
 import Post from "../Post/Post";
 import c from "./PostsList.module.scss";
 
-function PostsList(props) {
+function PostsList({ profileData, inputMsg, setInputMsg }) {
   const [postsList, setPostsList] = useState(null);
 
   useEffect(() => {
@@ -14,26 +14,31 @@ function PostsList(props) {
   }, []);
 
   useEffect(() => {
-    if (postsList && props.inputMsg !== "") {
+    if (postsList && inputMsg !== "") {
       let copy = structuredClone(postsList);
       copy.unshift({
         id: postsList.length + 1,
-        title: props.inputMsg,
+        title: inputMsg,
         reactions: 0,
       });
       setPostsList(copy);
     }
 
     return () => {
-      props.setInputMsg("");
+      setInputMsg("");
     };
-  }, [props.inputMsg]);
+  }, [inputMsg]);
 
   return (
     <div className={c.postsList}>
       {postsList ? (
         postsList.map((item) => (
-          <Post key={item.id} message={item.title} like={item.reactions} />
+          <Post
+            key={item.id}
+            message={item.title}
+            like={item.reactions}
+            userName={profileData.fullName}
+          />
         ))
       ) : (
         <Preloader />

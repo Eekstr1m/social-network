@@ -22,8 +22,8 @@ export default function MessagesBody({ item, authUserData }) {
     >
       <div className={c.message__wrapper}>
         <div className={c.message__content}>
-          <span>{item.body}</span>
-          <span className={c.time}>{sendedTime}</span>
+          <span className={c.message__body}>{item.body}</span>
+          <span className={c.message__time}>{sendedTime}</span>
         </div>
       </div>
     </div>

@@ -14,7 +14,6 @@ import Header from "./Components/Header/Header";
 import Sidebar from "./Components/SideBar/Sidebar";
 
 const Messages = React.lazy(() => import("./Components/Messages/Messages"));
-const Music = React.lazy(() => import("./Components/Music/Music"));
 const Chat = React.lazy(() => import("./Components/Chat/Chat"));
 const NotFound = React.lazy(() => import("./Components/NotFound/NotFound"));
 const Settings = React.lazy(() => import("./Components/Settings/Settings"));
@@ -84,7 +83,6 @@ function App() {
 
   const MessagesComponent = withAuthRedirect(Messages);
   const ChatComponent = withAuthRedirect(Chat);
-  const MusicComponent = withAuthRedirect(Music);
   const SettingsComponent = withAuthRedirect(Settings);
 
   const RedirectToProfile = withRedirectToProfile(Login);
@@ -97,8 +95,9 @@ function App() {
             value={{ authUserData, isUserAuth, setIsChanged }}
           >
             <Header />
-            <Sidebar />
+
             <div className="app-wrapper__content">
+              <Sidebar />
               <Suspense fallback={<Preloader />}>
                 <Routes>
                   <Route path="" element={<RedirectToLogin />} />
@@ -111,7 +110,6 @@ function App() {
                     <Route path="" element={<MessagesComponent />} />
                   </Route>
                   <Route path="/chat" element={<ChatComponent />} />
-                  <Route path="/music" element={<MusicComponent />} />
                   <Route path="/users">
                     <Route path=":aPage" element={<Users />} />
                     <Route path="" element={<Navigate to={`/users/1`} />} />

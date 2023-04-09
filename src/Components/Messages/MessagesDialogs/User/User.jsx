@@ -9,6 +9,20 @@ const lastActivity = (lastUserActivityDate) => {
   let date = new Date(lastUserActivityDate);
 
   const dayOfWeek = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   let hour = date.getHours() + 2;
   hour = hour < 10 ? `0${hour}` : `${hour}`;
@@ -28,36 +42,30 @@ const lastActivity = (lastUserActivityDate) => {
 function User({ item }) {
   const [lastMessage, setLastMessage] = useState("");
 
-  // useEffect(() => {
-  //   if (item.id) {
-  //     API.getLastSendedMessage(item.id).then((data) => {
-  //       if (data.totalCount > 0) {
-  //         setLastMessage(data.items[0].body);
-  //       }
-  //     });
-  //   }
-  // }, [item.id]);
+  useEffect(() => {
+    if (item.id) {
+      API.getLastSendedMessage(item.id).then((data) => {
+        if (data.totalCount > 0) {
+          setLastMessage(data.items[0].body);
+        }
+      });
+    }
+  }, [item.id]);
 
   return (
     <div className={c.message}>
       <NavLink
         to={`/messages/${item.id}`}
         className={(navData) =>
-          navData.isActive
-            ? `${c.user__name} ${c.activeUserMessage}`
-            : c.user__name
+          navData.isActive ? `${c.user} ${c.activeUser}` : c.user
         }
       >
-        <div className={c.message__photo}>
-          <img
-            src={item.photos.small || userImg}
-            className={c.message__img}
-            alt=""
-          />
+        <div className={c.photo}>
+          <img src={item.photos.small || userImg} className={c.image} alt="" />
         </div>
-        <div className={c.message__name}>
-          <div className={c.message__name}>{item.userName}</div>
-          <div className={c.last__message}>{lastMessage}</div>
+        <div className={c.user_info}>
+          <div className={c.user_name}>{item.userName}</div>
+          <div className={c.user_lastMessage}>{lastMessage}</div>
         </div>
         <div className={c.message__info}>
           <div className={c.message__time}>

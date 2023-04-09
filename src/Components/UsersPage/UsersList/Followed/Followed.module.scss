@@ -1,3 +1,4 @@
+@import "./../../../common/Vars.scss";
 .follow {
   display: flex;
   margin-top: 10px;
@@ -6,10 +7,10 @@
 .follow__btn {
   padding: 5px;
 
-  color: #fff;
-  background-color: #50c878;
+  // color: #fff;
+  background-color: $light-green;
 
-  border: 1px solid #333;
+  border: 1px solid $dark-green;
   border-radius: 5px;
 
   cursor: pointer;
