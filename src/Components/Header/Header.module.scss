@@ -1,10 +1,110 @@
+@import "./../common/Vars.scss";
 .header {
-    grid-area: header;
-    background-color: #50c878;
+  background-color: #fff;
+  margin-bottom: 30px;
+
+  box-shadow: 0 0 25px -10px;
 }
-.header__logo {
-    display: block;
-    width: 60px;
-    height: auto;
-    padding: 0 10px;
+.header_container {
+  width: 1230px;
+  margin: 0 auto;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__name {
+  width: 215px;
+
+  font-size: 36px;
+  font-weight: 400;
+
+  span {
+    color: $light-green;
+  }
+}
+
+.login__block {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.login {
+  text-decoration: none;
+  color: #000;
+  height: 100%;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    background-color: $light-green;
+  }
+}
+
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav_list {
+  height: 100%;
+
+  font-size: 18px;
+  font-weight: 300;
+  font-style: italic;
+
+  &:hover {
+    background-color: $light-green;
+
+    > .nav_item .subNav {
+      display: block;
+    }
+  }
+}
+.nav_item {
+  height: 100%;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.nav_link {
+  padding: 0 10px;
+}
+.nav_photo {
+  display: block;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+
+.subNav {
+  display: none;
+  width: 100%;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+
+  font-size: 16px;
+  font-weight: 300;
+
+  background-color: #fff;
+}
+.subNav_item {
+  display: block;
+  padding: 5px 10px;
+  text-align: right;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: $light-green;
+  }
 }

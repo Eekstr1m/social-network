@@ -1,0 +1,36 @@
+@import "./../../common/Vars.scss";
+.paginator {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+.item {
+  padding: 5px 10px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  margin: 0 5px;
+  cursor: pointer;
+
+  transition: background-color 0.2s linear, transform 0.2s linear;
+
+  &:hover {
+    background-color: $light-green;
+  }
+}
+.dots {
+  margin: 0 10px;
+}
+.selected {
+  padding: 5px 10px;
+  border: 1px solid #333;
+  border-radius: 7px;
+  margin: 0 5px;
+  cursor: pointer;
+
+  transition: background-color 0.2s linear, transform 0.2s linear;
+
+  background-color: $dark-green;
+  color: #fff;
+  transform: scale(1.2);
+}

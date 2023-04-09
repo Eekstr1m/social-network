@@ -1,30 +1,39 @@
-import React from "react";
-import ActiveDialog from "./ActiveDialog/ActiveDialog";
+import React, { useContext, useEffect, useState } from "react";
+import { API } from "../../API/api";
+import { AuthUserDataContext } from "../../App";
+import Preloader from "../common/Preloader/Preloader";
 import c from "./Messages.module.scss";
-import SendNewMessage from "./SendNewMessage/SendNewMessage";
-import UserMessage from "./UserMessage/UserMessage";
+import MessagesActiveDialog from "./MessagesActiveDialog/MessagesActiveDialog";
+import MessagesDialogs from "./MessagesDialogs/MessagesDialogs";
 
-function Messages(props) {
-  // Map array
-  let arrUSerMessage = props.state.usersData.map((obj) => (
-    <UserMessage key={obj.id} id={obj.id} name={obj.name} img={obj.img} />
-  ));
+function Messages() {
+  const { authUserData } = useContext(AuthUserDataContext);
 
-  let arrActiveDialog = props.state.dialogData.map((obj) => (
-    <ActiveDialog key={obj.id} msgText={obj.msgText} />
-  ));
+  const [isFetching, setIsFetching] = useState(false);
+  const [usersData, setUsersData] = useState([]);
+
+  useEffect(() => {
+    setIsFetching(true);
+    API.getDialogs().then((data) => {
+      setUsersData(data);
+      setIsFetching(false);
+    });
+  }, []);
 
   return (
-    <div className={c.messages}>
-      <div className={c.message}>{arrUSerMessage}</div>
-      <div className={c.dialog}>
-        <div className={c.dialog__messages}>{arrActiveDialog}</div>
-        <SendNewMessage
-          dispatch={props.dispatch}
-          addNewMessageText={props.state.addNewMessageText}
-        />
-      </div>
-    </div>
+    <>
+      {isFetching ? (
+        <Preloader />
+      ) : (
+        <div className={c.messages}>
+          <MessagesDialogs usersData={usersData} />
+          <MessagesActiveDialog
+            usersData={usersData}
+            authUserData={authUserData}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

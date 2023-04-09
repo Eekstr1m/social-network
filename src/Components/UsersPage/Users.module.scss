@@ -1,0 +1,13 @@
+.users_page {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 8fr 2fr;
+  // display: flex;
+}
+.users_list {
+  width: 100%;
+}
+.filter_bar {
+  // margin-left: 30px;
+  width: 100%;
+}

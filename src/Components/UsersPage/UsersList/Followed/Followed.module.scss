@@ -1,0 +1,28 @@
+@import "./../../../common/Vars.scss";
+.follow {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+}
+.follow__btn {
+  padding: 5px;
+
+  // color: #fff;
+  background-color: $light-green;
+
+  border: 1px solid $dark-green;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  transition: transform 0.2s linear;
+
+  &.followed {
+    background-color: transparent;
+    color: #000;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

@@ -1,9 +1,7 @@
 .messages {
   display: grid;
-  grid-template-columns: 4fr 8fr;
-  height: 100%;
-}
-.dialog {
-  height: 100%;
-  position: relative;
+  grid-template-columns: 340px auto;
+  gap: 10px;
+
+  // display: flex;
 }

@@ -1,0 +1,39 @@
+@import "./../../common/Vars.scss";
+.search {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
+}
+.search_input {
+  width: 200px;
+  height: 30px;
+
+  outline: none;
+  border: none;
+
+  background-color: $light-green;
+  border-radius: 5px;
+  padding: 0 10px;
+
+  transition: background-color 0.2s linear;
+
+  &::placeholder {
+    color: $gray;
+  }
+
+  &:focus {
+    outline: 1px solid $dark-green;
+  }
+}
+.filters {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  margin-top: 10px;
+}
+.filter_item {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  font-variant: small-caps;
+}

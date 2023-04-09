@@ -1,0 +1,35 @@
+.social {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 2px 5px;
+
+  background-color: #fff;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  &:hover {
+    > .social_icons {
+      display: flex;
+    }
+  }
+}
+
+.social_text {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+.social_icons {
+  display: none;
+  //   display: flex;
+  align-items: center;
+
+  position: absolute;
+  right: 0;
+  //   padding: 2px 5px;
+
+  background-color: #fff;
+  border-radius: 5px 0px 5px 5px;
+}

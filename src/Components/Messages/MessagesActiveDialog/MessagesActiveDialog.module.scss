@@ -1,0 +1,12 @@
+.active_dialog {
+  height: calc(100vh - 110px - 30px);
+
+  background-color: #fff;
+  border-radius: 10px;
+
+  padding: 15px 0;
+
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+}

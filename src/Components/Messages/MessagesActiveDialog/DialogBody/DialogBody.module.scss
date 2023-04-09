@@ -1,0 +1,15 @@
+.dialog {
+  box-sizing: border-box;
+  height: calc(100% - 110px);
+  overflow: auto;
+
+  padding: 0 15px;
+  // padding-left: 15px;
+}
+.no_messages {
+  display: grid;
+  place-items: center;
+}
+.dialog_messages {
+  display: grid;
+}

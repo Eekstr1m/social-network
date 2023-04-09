@@ -1,0 +1,58 @@
+@import "./../common/Vars.scss";
+.chat {
+  margin: 0 auto;
+}
+.messages {
+  height: calc(60vh - 30px);
+  width: fit-content;
+  min-width: 500px;
+  overflow: auto;
+}
+.image {
+  display: block;
+  width: 40px;
+  height: auto;
+}
+.messageItem {
+  display: flex;
+  padding: 10px 0;
+}
+.message_body {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+.userName {
+  font-weight: 700;
+}
+
+// form
+.form {
+  height: 40px;
+  width: 500px;
+  background-color: $light-green;
+
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+.input {
+  color: inherit;
+  border: none;
+  padding: 0 10px;
+  background: transparent;
+
+  &::placeholder {
+    color: $gray;
+  }
+
+  &:focus {
+    outline: 1px solid $dark-green;
+  }
+}
+.submit {
+  color: $gray;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

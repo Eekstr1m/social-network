@@ -1,19 +1,42 @@
+@import "./../../common/Vars.scss";
 .item {
-  padding: 0 10px;
-  line-height: 1.5;
-  color: #fff;
+  width: 100%;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  font-variant: small-caps;
+
+  transition: background-color 0.2s linear;
+
+  &:hover {
+    border-radius: 5px;
+    background-color: $light-green;
+  }
 }
 
 .item__link {
+  width: 100%;
+
+  font-size: 18px;
+  font-weight: 400;
+
   text-decoration: none;
   color: inherit;
 
-  transition: color 0.2s linear;
+  padding: 0px 20px;
 
-  &:hover {
-    color: #efc949;
-  }
+  transition: color 0.2s linear;
 }
 .activeLink {
-  color: rgb(0, 255, 251);
+  width: 100%;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+
+  color: #fff;
+
+  border-radius: 5px;
+  background-color: $dark-green;
 }

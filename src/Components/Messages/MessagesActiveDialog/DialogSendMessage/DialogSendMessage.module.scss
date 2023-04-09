@@ -1,0 +1,53 @@
+@import "./../../../common/Vars.scss";
+.form_box {
+  display: grid;
+  place-items: center;
+}
+.form {
+  height: 40px;
+  // width: calc(100% - 30px);
+  width: 100%;
+
+  background-color: $light-green;
+
+  position: relative;
+  display: grid;
+}
+.input {
+  color: inherit;
+  border: none;
+  padding: 0 15px;
+  background: transparent;
+
+  &::placeholder {
+    color: $gray;
+  }
+
+  &:focus {
+    outline: 1px solid $dark-green;
+  }
+}
+.submit {
+  // color: inherit;
+  color: $gray;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background: $dark-green;
+  border: none;
+  cursor: pointer;
+
+  i {
+    position: relative;
+    left: -1px;
+    color: #fff;
+    font-size: 16px;
+  }
+}
